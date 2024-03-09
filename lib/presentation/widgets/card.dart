@@ -26,13 +26,13 @@ class card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     void _cartclicked(int inde) {
-      print(inde);
       context.read<EcomBloc>().add(AddCartEvent(index: inde));
     }
 
+    // ignore: no_leading_underscores_for_local_identifiers
     void _favClicked(int inde) {
-      print(inde);
       context.read<EcomBloc>().add(AddfavEvent(index: inde));
     }
 
@@ -79,8 +79,8 @@ class card extends StatelessWidget {
                   _favClicked(index);
                 },
                 icon: isfav
-                    ? Icon((Icons.favorite))
-                    : Icon(Icons.favorite_outline),
+                    ? const Icon((Icons.favorite))
+                    : const Icon(Icons.favorite_outline),
                 iconSize: 22,
               ),
               IconButton(
@@ -88,8 +88,8 @@ class card extends StatelessWidget {
                   _cartclicked(index);
                 },
                 icon: iscart
-                    ? Icon(Icons.shopping_cart)
-                    : Icon(Icons.shopping_bag_outlined),
+                    ? const Icon(Icons.shopping_cart)
+                    : const Icon(Icons.shopping_bag_outlined),
                 iconSize: 22,
               )
             ],

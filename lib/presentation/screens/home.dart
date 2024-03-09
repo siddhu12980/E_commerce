@@ -2,6 +2,7 @@ import 'package:e_com/bloc/ecom_bloc.dart';
 import 'package:e_com/data/data_model.dart';
 import 'package:e_com/presentation/screens/cart_screen.dart';
 import 'package:e_com/presentation/screens/fav_screen.dart';
+import 'package:e_com/presentation/screens/temp_uploadscreen.dart';
 import 'package:e_com/presentation/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +45,15 @@ class _MyHomePageState extends State<MyHomePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const CartScreen()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.upload_file_outlined),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const UploadScreen()),
               );
             },
           ),
