@@ -1,14 +1,18 @@
 import 'package:e_com/bloc/cart_blloc.dart/cart_bloc.dart';
 import 'package:e_com/bloc/ecom_bloc.dart';
+import 'package:e_com/bloc/user_bloc/User_bloc.dart';
+import 'package:e_com/bloc/user_provider.dart';
 import 'package:e_com/data/data_provider/data_provider.dart';
 import 'package:e_com/data/repositry/data_repo.dart';
 import 'package:e_com/firebase_options.dart';
 import 'package:e_com/presentation/screens/home.dart';
 import 'package:e_com/presentation/screens/login_screen.dart';
+import 'package:e_com/presentation/screens/temp_uploadscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,34 +40,40 @@ class MyApp extends StatelessWidget {
           BlocProvider<CartBloc>(
             create: (context) => CartBloc(context.read<DataRepository>()),
           ),
-        ],
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
+          BlocProvider<UserBloc>(
+            create: (context) => UserBloc(context.read<DataRepository>()),
           ),
-          debugShowCheckedModeBanner: false,
-          home: StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.active) {
-                if (snapshot.hasData) {
-                  return MyHomePage();
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text('${snapshot.hasError}'),
-                  );
+        ],
+        child: ChangeNotifierProvider<UserProvider>(
+          create: (_) => UserProvider(),
+          child: MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            debugShowCheckedModeBanner: false,
+            home: StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.active) {
+                  if (snapshot.hasData) {
+                    return const UploadScreen();
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text('${snapshot.hasError}'),
+                    );
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    );
+                  }
                 }
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(color: Colors.white),
-                  );
-                }
-              }
 
-              return const LoginScreen();
-            },
+                return const LoginScreen();
+              },
+            ),
           ),
         ),
       ),

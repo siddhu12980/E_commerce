@@ -1,6 +1,7 @@
 import 'package:e_com/auth/auth_methods.dart';
 import 'package:e_com/presentation/screens/home.dart';
 import 'package:e_com/presentation/screens/signup_screen.dart';
+import 'package:e_com/presentation/screens/temp_uploadscreen.dart';
 import 'package:e_com/presentation/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -40,9 +41,9 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text, password: _passwordController.text);
 
     if (res == "success") {
-      Navigator.of(context).push(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const MyHomePage(),
+          builder: (context) => const UploadScreen(),
         ),
       );
     } else {
