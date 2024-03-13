@@ -33,18 +33,25 @@ class AuthMethods {
 
         //add user to database
 
-        // model.User user1 =
-        //     model.User(username: username, uid: cred.user!.uid, email: email);
+        model.User user1 =
+            model.User(username: username, uid: cred.user!.uid, email: email);
 
-        // await _firestore
-        //     .collection('users')
-        //     .doc(cred.user!.uid)
-        //     .set(user1.tojson());
+        await _firestore
+            .collection('users')
+            .doc(cred.user!.uid)
+            .set(user1.tojson());
 
         res = "sucess";
       }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
     } catch (err) {
       res = err.toString();
+      print(err.toString());
     }
     return res;
   }
@@ -67,6 +74,12 @@ class AuthMethods {
       //   if (e.code == "user-not-found") {
       //     print("Please create the user first");
       //   }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
     } catch (err) {
       res = err.toString();
     }
@@ -74,3 +87,6 @@ class AuthMethods {
     return res;
   }
 }
+
+
+//await FirebaseAuth.instance.signOut(); for signout 

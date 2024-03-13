@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text(title),
         actions: [
           IconButton(
-            icon: Icon(Icons.favorite),
+            icon: const Icon(Icons.favorite),
             onPressed: () {
               Navigator.push(
                 context,
@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.shopping_cart_checkout),
+            icon: const Icon(Icons.shopping_cart_checkout),
             onPressed: () {
               Navigator.push(
                 context,
@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.upload_file_outlined),
+            icon: const Icon(Icons.upload_file_outlined),
             onPressed: () {
               Navigator.push(
                 context,

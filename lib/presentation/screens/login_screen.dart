@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (res == "success") {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const UploadScreen(),
+          builder: (context) => const MyHomePage(),
         ),
       );
     } else {
