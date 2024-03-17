@@ -1,5 +1,4 @@
 import 'package:e_com/bloc/cart_blloc.dart/cart_bloc.dart';
-import 'package:e_com/bloc/ecom_bloc.dart';
 import 'package:e_com/data/data_model.dart';
 import 'package:e_com/presentation/widgets/card.dart';
 import 'package:flutter/material.dart';
